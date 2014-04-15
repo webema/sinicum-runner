@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'sinicum-runner'
+
+runner = Sinicum::Runner::RunnerCli.new
+runner.run(ARGV)
