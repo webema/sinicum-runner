@@ -19,3 +19,4 @@ tmp
 # Maven
 /target
 /dependency-reduced-pom.xml
+/lib/java

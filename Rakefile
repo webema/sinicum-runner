@@ -10,3 +10,4 @@ desc "Runs the tests"
 RSpec::Core::RakeTask.new(:spec)
 
 task default: [:spec, :maven_test]
+task :build => :maven_package

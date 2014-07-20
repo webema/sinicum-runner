@@ -14,6 +14,7 @@ Gem::Specification.new do |gem|
   gem.license       = "MIT/Apache-2.0"
 
   gem.files         = `git ls-files`.split($/)
+  gem.files         += Dir['lib/java/**/*.jar']
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
