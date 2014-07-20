@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dievision/sinicum-runner.svg?branch=pm-environments)](https://travis-ci.org/dievision/sinicum-runner)
+
 # Sinicum::Runner
 
 Sinicum-runner is a simple embedded Tomcat server, which runs Magnolia CMS from  the app’s root directory.
