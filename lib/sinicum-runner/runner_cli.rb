@@ -4,6 +4,8 @@ require 'optparse'
 module Sinicum
   module Runner
     class RunnerCli
+      SINICUM_ENV_NAME = "SINICUM_ENV"
+      WEBAPP_BASE_DIR = File.join(FileUtils.pwd, "tmp", "magnolia")
       RUNNER_TMP_DIR = ".sinicum-runner"
 
       def run(args)
@@ -37,7 +39,8 @@ module Sinicum
       def build_webapp
         current_dir = FileUtils.pwd
         FileUtils.cd(magnolia_module_dir)
-        run_command("mvn -Dmaven.test.skip=true clean package war:exploded")
+        run_command("#{SINICUM_ENV_NAME}=#{@options.environment} " +
+          "mvn -Dmaven.test.skip=true clean package war:exploded")
       ensure
         FileUtils.cd(current_dir)
       end
@@ -48,7 +51,8 @@ module Sinicum
         options.concat(["-jar", jar_location, "--basedir", runner_dir,
             "--appbase", webapp_directory_path])
         options.concat(@options.to_option_args)
-        ret_value = system("java", *options)
+        ret_value = system({ SINICUM_ENV_NAME => @options.environment }, "java", *options)
+        puts ""
         exit 1 unless ret_value
         ret_value
       end
@@ -81,7 +85,7 @@ module Sinicum
       end
 
       def webapp_directory_path
-        "#{magnolia_module_dir}/target/#{magnolia_module_name}-#{magnolia_module_version}"
+        File.join(WEBAPP_BASE_DIR, @options.environment, @options.environment)
       end
 
       def magnolia_module_name
@@ -144,10 +148,11 @@ module Sinicum
     end
 
     class Options
-      attr_reader :port, :ajp_port, :context, :skip_build, :only_build, :hostname
+      DEFAULT_ENVIRONMENT = "development"
+      attr_reader :port, :ajp_port, :context, :skip_build, :only_build, :hostname, :environment
 
       def initialize(args = [])
-        opts = OptionParser.new do |opts|
+        options = OptionParser.new do |opts|
           opts.on("-p", "--port [PORT]", "HTTP port to bind to") do |port|
             @port = port
           end
@@ -168,11 +173,16 @@ module Sinicum
           opts.on("-b", "--only-build", "only builds the Maven project") do |skip|
             @only_build = true
           end
+          @environment = DEFAULT_ENVIRONMENT
+          opts.on("-e", "--environment [ENVIRONMENT]",
+            "name of the Magnolia environment") do |environment|
+            @environment = environment
+          end
           opts.on("-J[PARAM]", "JVM parameter") do |parameter|
             jvm_params << parameter
           end
         end
-        opts.parse!(args)
+        options.parse!(args)
       end
 
       def jvm_params
