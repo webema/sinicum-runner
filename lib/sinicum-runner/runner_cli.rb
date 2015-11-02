@@ -149,7 +149,8 @@ module Sinicum
 
     class Options
       DEFAULT_ENVIRONMENT = "development"
-      attr_reader :port, :ajp_port, :context, :skip_build, :only_build, :hostname, :environment
+      attr_reader :port, :ajp_port, :context, :skip_build, :only_build, :hostname,
+                  :environment, :scheme
 
       def initialize(args = [])
         options = OptionParser.new do |opts|
@@ -164,6 +165,9 @@ module Sinicum
           end
           opts.on("-n", "--hostname [HOSTNAME]", "application host name") do |hostname|
             @hostname = hostname
+          end
+          opts.on("-S", "--scheme [SCHEME]", "tomcat connector scheme") do |scheme|
+            @scheme = scheme
           end
           @skip_build = false
           opts.on("-s", "--skip-build", "skips the build of the Maven project") do |skip|
@@ -205,6 +209,7 @@ module Sinicum
         args.concat(["-a", ajp_port]) if ajp_port
         args.concat(["-c", context]) if context
         args.concat(["-n", hostname]) if hostname
+        args.concat(["-S", scheme]) if scheme
         args
       end
     end
