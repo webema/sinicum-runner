@@ -18,10 +18,10 @@ public class Configuration {
     @Parameter(names = {"-n", "--hostname"}, description = "Tomcat Hostname")
     private String hostname;
 
-    @Parameter(names = {"-S", "--ssl-scheme"}, description = "Tomcat Connector SSL Scheme")
+    @Parameter(names = {"-S", "--https-scheme"}, description = "Tomcat Connector HTTPS Scheme")
     private boolean scheme;
 
-    @Parameter(names = {"-P", "--proxyport"}, description = "Tomcat Connector Proxyport")
+    @Parameter(names = {"-P", "--proxyport"}, description = "Tomcat Connector Proxy port")
     private Integer proxyPort = 443;
 
     @Parameter(names = "--basedir", description = "Tomcat Base directory", required = true)
@@ -54,7 +54,7 @@ public class Configuration {
         return hostname;
     }
 
-    public boolean isSslScheme() {
+    public boolean isHttpsScheme() {
         return scheme;
     }
 

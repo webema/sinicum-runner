@@ -166,10 +166,10 @@ module Sinicum
           opts.on("-n", "--hostname [HOSTNAME]", "application host name") do |hostname|
             @hostname = hostname
           end
-          opts.on("-S", "--scheme [SCHEME]", "tomcat connector scheme") do |scheme|
+          opts.on("-S", "--https-scheme", "use HTTPS as connector scheme and 443 as proxy port") do |scheme|
             @scheme = scheme
           end
-          opts.on("-P", "--proxyport [PROXYPORT]", "tomcat connector proxyport") do |proxyport|
+          opts.on("-P", "--proxyport [PROXYPORT]", "tomcat connector proxy port") do |proxyport|
             @proxyport = proxyport
           end
           @skip_build = false

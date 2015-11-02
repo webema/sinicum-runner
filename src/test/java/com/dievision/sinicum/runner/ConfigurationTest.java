@@ -56,7 +56,7 @@ public class ConfigurationTest {
     public void testSslScheme() {
         addArgs(new String[]{ "-S" });
         new JCommander(config, argv);
-        assertEquals(true, config.isSslScheme());
+        assertEquals(true, config.isHttpsScheme());
         assertEquals(443, config.getProxyPort().intValue());
     }
 
@@ -64,7 +64,7 @@ public class ConfigurationTest {
     public void testSslSchemeWithProxyPort() {
         addArgs(new String[]{ "-S", "-P", "4242" });
         new JCommander(config, argv);
-        assertEquals(true, config.isSslScheme());
+        assertEquals(true, config.isHttpsScheme());
         assertEquals(4242, config.getProxyPort().intValue());
     }
 

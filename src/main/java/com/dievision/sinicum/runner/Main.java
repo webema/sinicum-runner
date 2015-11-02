@@ -14,7 +14,7 @@ public class Main {
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(config.getHttpPort());
         tomcat.getConnector().setURIEncoding("UTF-8");
-        if (config.isSslScheme()) {
+        if (config.isHttpsScheme()) {
             tomcat.getConnector().setScheme("https");
             tomcat.getConnector().setProxyPort(443);
         }
