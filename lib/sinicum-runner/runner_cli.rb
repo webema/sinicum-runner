@@ -212,7 +212,7 @@ module Sinicum
         args.concat(["-a", ajp_port]) if ajp_port
         args.concat(["-c", context]) if context
         args.concat(["-n", hostname]) if hostname
-        args.concat(["-S", scheme]) if scheme
+        args.concat(["-S"]) if scheme
         args.concat(["-P", proxyport]) if proxyport
         args
       end

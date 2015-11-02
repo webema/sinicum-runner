@@ -4,7 +4,7 @@
 
   <groupId>com.dievision.sinicum</groupId>
   <artifactId>sinicum-runner</artifactId>
-  <version>0.5.0.pre6</version>
+  <version>0.5.0.pre7</version>
   <packaging>jar</packaging>
 
   <name>sinicum-runner</name>
