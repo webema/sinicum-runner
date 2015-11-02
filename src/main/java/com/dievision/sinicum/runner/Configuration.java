@@ -21,6 +21,9 @@ public class Configuration {
     @Parameter(names = {"-S", "--scheme"}, description = "Tomcat Connector Scheme")
     private String scheme;
 
+    @Parameter(names = {"-P", "--proxyport"}, description = "Tomcat Connector Proxyport")
+    private Integer proxyPort = 443;
+
     @Parameter(names = "--basedir", description = "Tomcat Base directory", required = true)
     private String baseDir;
 
@@ -51,5 +54,11 @@ public class Configuration {
         return hostname;
     }
 
-    public String getScheme() { return scheme; }
+    public String getScheme() {
+        return scheme;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
 }

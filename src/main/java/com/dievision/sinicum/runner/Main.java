@@ -14,14 +14,14 @@ public class Main {
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(config.getHttpPort());
         tomcat.getConnector().setURIEncoding("UTF-8");
+        if ("https".equals(config.getScheme())) {
+            tomcat.getConnector().setScheme("https");
+            tomcat.getConnector().setProxyPort(config.getProxyPort());
+        }
         if (config.getAjpPort() != null) {
             Connector connector = new Connector("AJP/1.3");
             connector.setPort(config.getAjpPort());
             connector.setURIEncoding("UTF-8");
-            if ("https".equals(config.getScheme())) {
-                connector.setScheme("https");
-                connector.setProxyPort(443);
-            }
             tomcat.getService().addConnector(connector);
         }
         tomcat.setBaseDir(config.getBaseDir());
