@@ -18,6 +18,12 @@ public class Configuration {
     @Parameter(names = {"-n", "--hostname"}, description = "Tomcat Hostname")
     private String hostname;
 
+    @Parameter(names = {"-S", "--https-scheme"}, description = "Tomcat Connector HTTPS Scheme")
+    private boolean scheme;
+
+    @Parameter(names = {"-P", "--proxyport"}, description = "Tomcat Connector Proxy port")
+    private Integer proxyPort = 443;
+
     @Parameter(names = "--basedir", description = "Tomcat Base directory", required = true)
     private String baseDir;
 
@@ -46,5 +52,13 @@ public class Configuration {
 
     public String getHostname() {
         return hostname;
+    }
+
+    public boolean isHttpsScheme() {
+        return scheme;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
     }
 }
