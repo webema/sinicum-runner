@@ -18,6 +18,10 @@ public class Main {
             Connector connector = new Connector("AJP/1.3");
             connector.setPort(config.getAjpPort());
             connector.setURIEncoding("UTF-8");
+            if ("https".equals(config.getScheme())) {
+                connector.setScheme("https");
+                connector.setProxyPort(443);
+            }
             tomcat.getService().addConnector(connector);
         }
         tomcat.setBaseDir(config.getBaseDir());

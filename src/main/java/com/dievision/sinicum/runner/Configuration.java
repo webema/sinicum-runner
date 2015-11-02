@@ -18,6 +18,9 @@ public class Configuration {
     @Parameter(names = {"-n", "--hostname"}, description = "Tomcat Hostname")
     private String hostname;
 
+    @Parameter(names = {"-s", "--scheme"}, description = "Tomcat Connector Scheme")
+    private String scheme;
+
     @Parameter(names = "--basedir", description = "Tomcat Base directory", required = true)
     private String baseDir;
 
@@ -47,4 +50,6 @@ public class Configuration {
     public String getHostname() {
         return hostname;
     }
+
+    public String getScheme() { return scheme; }
 }
