@@ -59,11 +59,10 @@ public class Configuration {
     }
 
     public Integer getProxyPort() {
-        if (isHttpsScheme()) {
-            if (proxyPort == null) {
-                return 443;
-            }
+        if (isHttpsScheme() && proxyPort == null) {
+            return 443;
+        } else {
+            return proxyPort;
         }
-        return proxyPort;
     }
 }
