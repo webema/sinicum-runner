@@ -22,7 +22,7 @@ public class Configuration {
     private boolean scheme;
 
     @Parameter(names = {"-P", "--proxyport"}, description = "Tomcat Connector Proxy port")
-    private Integer proxyPort = 443;
+    private Integer proxyPort;
 
     @Parameter(names = "--basedir", description = "Tomcat Base directory", required = true)
     private String baseDir;
@@ -59,6 +59,11 @@ public class Configuration {
     }
 
     public Integer getProxyPort() {
+        if (isHttpsScheme()) {
+            if (proxyPort == null) {
+                return 443;
+            }
+        }
         return proxyPort;
     }
 }
