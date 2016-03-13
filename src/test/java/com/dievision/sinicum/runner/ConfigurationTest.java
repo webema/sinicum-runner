@@ -53,6 +53,22 @@ public class ConfigurationTest {
     }
 
     @Test
+    public void testHttpsScheme() {
+        addArgs(new String[]{ "-S" });
+        new JCommander(config, argv);
+        assertEquals(true, config.isHttpsScheme());
+        assertEquals(443, config.getProxyPort().intValue());
+    }
+
+    @Test
+    public void testHttpsSchemeWithProxyPort() {
+        addArgs(new String[]{ "-S", "-P", "4242" });
+        new JCommander(config, argv);
+        assertEquals(true, config.isHttpsScheme());
+        assertEquals(4242, config.getProxyPort().intValue());
+    }
+
+    @Test
     public void testBaseDirAppBase() {
         argv = new String[]{ "--basedir", "/path/to/dir", "--appbase", "/path/to/appbase"};
         new JCommander(config, argv);

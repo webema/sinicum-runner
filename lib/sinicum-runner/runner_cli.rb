@@ -149,7 +149,8 @@ module Sinicum
 
     class Options
       DEFAULT_ENVIRONMENT = "development"
-      attr_reader :port, :ajp_port, :context, :skip_build, :only_build, :hostname, :environment
+      attr_reader :port, :ajp_port, :context, :skip_build, :only_build, :hostname,
+                  :environment, :scheme, :proxyport
 
       def initialize(args = [])
         options = OptionParser.new do |opts|
@@ -164,6 +165,12 @@ module Sinicum
           end
           opts.on("-n", "--hostname [HOSTNAME]", "application host name") do |hostname|
             @hostname = hostname
+          end
+          opts.on("-S", "--https-scheme", "use HTTPS as connector scheme and 443 as proxy port") do |scheme|
+            @scheme = scheme
+          end
+          opts.on("-P", "--proxyport [PROXYPORT]", "tomcat connector proxy port") do |proxyport|
+            @proxyport = proxyport
           end
           @skip_build = false
           opts.on("-s", "--skip-build", "skips the build of the Maven project") do |skip|
@@ -205,6 +212,8 @@ module Sinicum
         args.concat(["-a", ajp_port]) if ajp_port
         args.concat(["-c", context]) if context
         args.concat(["-n", hostname]) if hostname
+        args.concat(["-S"]) if scheme
+        args.concat(["-P", proxyport]) if proxyport
         args
       end
     end

@@ -14,6 +14,13 @@ public class Main {
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(config.getHttpPort());
         tomcat.getConnector().setURIEncoding("UTF-8");
+        if (config.isHttpsScheme()) {
+            tomcat.getConnector().setScheme("https");
+            tomcat.getConnector().setProxyPort(443);
+        }
+        if (config.getProxyPort() != null) {
+            tomcat.getConnector().setProxyPort(config.getProxyPort());
+        }
         if (config.getAjpPort() != null) {
             Connector connector = new Connector("AJP/1.3");
             connector.setPort(config.getAjpPort());
