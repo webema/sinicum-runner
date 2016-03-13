@@ -40,7 +40,7 @@ module Sinicum
         current_dir = FileUtils.pwd
         FileUtils.cd(magnolia_module_dir)
         run_command("#{SINICUM_ENV_NAME}=#{@options.environment} " +
-          "mvn -Dmaven.test.skip=true clean package war:exploded")
+          "mvn --batch-mode -Dmaven.test.skip=true clean package war:exploded")
       ensure
         FileUtils.cd(current_dir)
       end
