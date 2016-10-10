@@ -1,5 +1,6 @@
 require 'rexml/document'
 require 'optparse'
+require 'fileutils'
 
 module Sinicum
   module Runner
